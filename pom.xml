@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.4.5</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>tw.fengqing.spring.springbucks</groupId>
+	<artifactId>customer-service</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>customer-service</name>
+	<description>Demo project for Spring Boot</description>
+
+	<properties>
+		<!-- Java 版本設定 -->
+		<java.version>21</java.version>
+		
+		<!-- Spring Cloud 版本管理 -->
+		<spring-cloud.version>2024.0.2</spring-cloud.version>
+		
+		<!-- 第三方依賴版本管理 -->
+		<!-- Joda Money: 用於貨幣處理，選擇穩定版本確保相容性 -->
+		<joda-money.version>2.0.2</joda-money.version>
+		
+		<!-- Jackson Hibernate6 模組: 用於 Hibernate 6 的 JSON 序列化支援 -->
+		<jackson-datatype-hibernate6.version>2.19.1</jackson-datatype-hibernate6.version>
+		
+		<!-- Apache Commons Lang3: 提供常用的工具類，選擇最新穩定版本 -->
+		<commons-lang3.version>3.17.0</commons-lang3.version>
+	</properties>
+
+	<dependencies>
+		<!-- Spring Boot 核心依賴 - 不指定版本，使用 Spring Boot 預設版本 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		
+		<!-- Spring Cloud 服務發現依賴 - 版本由 dependencyManagement 管理 -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-zookeeper-discovery</artifactId>
+		</dependency>
+
+		<!-- 第三方依賴 - 版本由 dependencyManagement 管理 -->
+		<dependency>
+			<groupId>org.joda</groupId>
+			<artifactId>joda-money</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+
+		<!-- HTTP 客戶端依賴 - 使用 Spring Boot 預設版本 -->
+		<dependency>
+			<groupId>org.apache.httpcomponents.client5</groupId>
+			<artifactId>httpclient5</artifactId>
+		</dependency>
+		
+		<!-- 開發工具依賴 - 使用 Spring Boot 預設版本 -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		
+		<!-- 測試依賴 - 使用 Spring Boot 預設版本 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Spring Cloud 依賴管理 - 統一管理所有 Spring Cloud 組件版本 -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			
+			<!-- 自定義版本依賴管理 -->
+			<!-- Joda Money: 覆蓋 Spring Boot 預設版本，確保貨幣處理的穩定性 -->
+			<dependency>
+				<groupId>org.joda</groupId>
+				<artifactId>joda-money</artifactId>
+				<version>${joda-money.version}</version>
+			</dependency>
+			
+			<!-- Apache Commons Lang3: 覆蓋 Spring Boot 預設版本，使用最新穩定版本 -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${commons-lang3.version}</version>
+			</dependency>
+			
+			<!-- Jackson Hibernate6 模組: 用於 Hibernate 6 的 JSON 序列化支援 -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.datatype</groupId>
+				<artifactId>jackson-datatype-hibernate6</artifactId>
+				<version>${jackson-datatype-hibernate6.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
